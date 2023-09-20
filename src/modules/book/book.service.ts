@@ -8,11 +8,24 @@ import { Book } from './schemas/book.schema';
 export class BookService {
   constructor(
     @InjectModel('Book') private readonly bookModel: Model<Book>,
-  ) {}
+  ) { }
 
   // fetch all
   async getAll(): Promise<Book[]> {
-    const books = await this.bookModel.find().exec();
+    const books = await this.bookModel.find().populate([
+      {
+        path: 'author',
+        select: 'firstName lastName'
+      },
+      {
+        path: 'category',
+        select: 'name'
+      },
+      {
+        path: 'publisher',
+        select: 'name address phoneNumber email'
+      },
+    ]).exec();
     return books;
   }
 
