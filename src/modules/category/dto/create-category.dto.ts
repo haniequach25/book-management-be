@@ -1,4 +1,7 @@
+import { PartialType } from "@nestjs/swagger";
+
 export class CreateCategoryDTO {
     name: string;
-    created_at: Date;
 }
+
+export class UpdateCategoryDTO extends PartialType(CreateCategoryDTO) { }

@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { Author } from './interfaces/author.interface';
-import { CreateAuthorDTO } from './dto/create-author.dto';
+import { CreateAuthorDTO, UpdateAuthorDTO } from './dto/create-author.dto';
+import { Author } from './schemas/author.schema';
 
 @Injectable()
 export class AuthorService {
   constructor(
     @InjectModel('Author') private readonly authorModel: Model<Author>,
-  ) {}
+  ) { }
 
   // fetch all
   async getAll(): Promise<Author[]> {
@@ -29,7 +29,7 @@ export class AuthorService {
   }
 
   // Edit details
-  async update(id: number, createDTO: CreateAuthorDTO): Promise<Author> {
+  async update(id: number, createDTO: UpdateAuthorDTO): Promise<Author> {
     const updated = await this.authorModel.findByIdAndUpdate(id, createDTO, {
       new: true,
     });

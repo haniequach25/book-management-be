@@ -1,7 +1,9 @@
 import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param } from '@nestjs/common';
 import { AuthorService } from './author.service';
-import { CreateAuthorDTO } from './dto/create-author.dto';
+import { CreateAuthorDTO, UpdateAuthorDTO } from './dto/create-author.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('author')
 @Controller('author')
 export class AuthorController {
     constructor(private authorService: AuthorService) { }
@@ -33,7 +35,7 @@ export class AuthorController {
 
     // update by id
     @Post('/:id')
-    async update(@Res() res, @Param('id') id, @Body() createDTO: CreateAuthorDTO) {
+    async update(@Res() res, @Param('id') id, @Body() createDTO: UpdateAuthorDTO) {
         const author = await this.authorService.update(id, createDTO);
         if (!author) throw new NotFoundException('author does not exist!');
         return res.status(HttpStatus.OK).json({

@@ -1,7 +1,9 @@
 import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param } from '@nestjs/common';
 import { BookService } from './book.service';
-import { CreateBookDTO } from './dto/create-book.dto';
+import { CreateBookDTO, UpdateBookDTO } from './dto/create-book.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('book')
 @Controller('book')
 export class BookController {
     constructor(private bookService: BookService) { }
@@ -33,7 +35,7 @@ export class BookController {
 
     // update by id
     @Post('/:id')
-    async update(@Res() res, @Param('id') id, @Body() createDTO: CreateBookDTO) {
+    async update(@Res() res, @Param('id') id, @Body() createDTO: UpdateBookDTO) {
         const book = await this.bookService.update(id, createDTO);
         if (!book) throw new NotFoundException('book does not exist!');
         return res.status(HttpStatus.OK).json({

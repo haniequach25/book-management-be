@@ -5,3 +5,5 @@ export class CreateBookDTO {
     published_date: Date;
     created_at: Date;
 }
+
+export class UpdateBookDTO extends CreateBookDTO { }

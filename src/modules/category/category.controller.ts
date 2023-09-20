@@ -1,7 +1,9 @@
 import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param } from '@nestjs/common';
-import { CreateCategoryDTO } from './dto/create-category.dto';
+import { CreateCategoryDTO, UpdateCategoryDTO } from './dto/create-category.dto';
 import { CategoryService } from './category.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('category')
 @Controller('category')
 export class CategoryController {
     constructor(private categoryService: CategoryService) { }
@@ -33,7 +35,7 @@ export class CategoryController {
 
     // update by id
     @Post('/:id')
-    async update(@Res() res, @Param('id') id, @Body() createDTO: CreateCategoryDTO) {
+    async update(@Res() res, @Param('id') id, @Body() createDTO: UpdateCategoryDTO) {
         const category = await this.categoryService.update(id, createDTO);
         if (!category) throw new NotFoundException('category does not exist!');
         return res.status(HttpStatus.OK).json({

@@ -1,8 +1,22 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 
-export const AuthorSchema = new mongoose.Schema({
-    first_name: String,
-    last_name: String,
-    dob: { type: Date, default: Date.now },
-    created_at: { type: Date, default: Date.now },
-});
+@Schema()
+export class Author {
+    @Prop()
+    firstName: string;
+
+    @Prop()
+    lastName: String;
+
+    @Prop({
+        type: Date,
+        default: Date.now()
+    })
+    dob: Date;
+
+    @Prop()
+    description: String;
+};
+
+export const AuthorSchema = SchemaFactory.createForClass(Author);
