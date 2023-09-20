@@ -14,16 +14,8 @@ export class OrderService {
   async getAll(): Promise<Order[]> {
     const orders = await this.orderModel.find().populate([
       {
-        path: 'author',
-        select: 'firstName lastName'
-      },
-      {
-        path: 'category',
-        select: 'name'
-      },
-      {
-        path: 'publisher',
-        select: 'name address phoneNumber email'
+        path: 'items.book',
+        select: 'title page_number price published_date'
       },
     ]).exec();
     return orders;

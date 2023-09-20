@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
+import { Book } from 'src/modules/book/schemas/book.schema';
 
-interface Items {
+class Items {
     quantity: number;
     book: { type: mongoose.Types.ObjectId, ref: "Book" };
 }
@@ -16,7 +17,7 @@ export class Order {
     customerPhoneNumber: string;
 
     @Prop(
-        [{ type: mongoose.Types.ObjectId, ref: "Book" }]
+        [{ quantity: Number, book: { type: mongoose.Types.ObjectId, ref: "Book" } }]
     )
     items: Items[];
 };
