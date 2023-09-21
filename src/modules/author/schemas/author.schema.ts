@@ -19,4 +19,4 @@ export class Author {
     description: String;
 };
 
-export const AuthorSchema = SchemaFactory.createForClass(Author);
+export const AuthorSchema = SchemaFactory.createForClass(Author).index({'$**': 'text'});

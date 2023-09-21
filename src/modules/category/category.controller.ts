@@ -2,6 +2,7 @@ import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundExcep
 import { CreateCategoryDTO, UpdateCategoryDTO } from './dto/create-category.dto';
 import { CategoryService } from './category.service';
 import { ApiTags } from '@nestjs/swagger';
+import { SearchFilter } from 'src/common/dto/search-filter.dto';
 
 @ApiTags('category')
 @Controller('category')
@@ -20,8 +21,8 @@ export class CategoryController {
 
     // get all
     @Get('')
-    async getAll(@Res() res) {
-        const categories = await this.categoryService.getAll();
+    async getAll(@Res() res, @Query() filter: SearchFilter) {
+        const categories = await this.categoryService.getAll(filter);
         return res.status(HttpStatus.OK).json(categories);
     }
 

@@ -2,6 +2,7 @@ import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundExcep
 import { ApiTags } from '@nestjs/swagger';
 import { OrderService } from './order.service';
 import { CreateOrderDTO, UpdateOrderDTO } from './dto/create-order.dto';
+import { SearchFilter } from 'src/common/dto/search-filter.dto';
 
 @ApiTags('order')
 @Controller('order')
@@ -20,8 +21,8 @@ export class OrderController {
 
     // get all
     @Get('')
-    async getAll(@Res() res) {
-        const orders = await this.orderService.getAll();
+    async getAll(@Res() res, @Query() filter: SearchFilter) {
+        const orders = await this.orderService.getAll(filter);
         return res.status(HttpStatus.OK).json(orders);
     }
 

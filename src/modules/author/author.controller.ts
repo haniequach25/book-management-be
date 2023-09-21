@@ -2,6 +2,7 @@ import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundExcep
 import { AuthorService } from './author.service';
 import { CreateAuthorDTO, UpdateAuthorDTO } from './dto/create-author.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { SearchFilter } from 'src/common/dto/search-filter.dto';
 
 @ApiTags('author')
 @Controller('author')
@@ -20,8 +21,8 @@ export class AuthorController {
 
     // get all
     @Get('')
-    async getAll(@Res() res) {
-        const authors = await this.authorService.getAll();
+    async getAll(@Res() res, @Query() filter: SearchFilter) {
+        const authors = await this.authorService.getAll(filter);
         return res.status(HttpStatus.OK).json(authors);
     }
 

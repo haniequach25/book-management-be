@@ -38,4 +38,4 @@ export class Book {
     publisher: Publisher;
 };
 
-export const BookSchema = SchemaFactory.createForClass(Book);
+export const BookSchema = SchemaFactory.createForClass(Book).index({'$**': 'text'});

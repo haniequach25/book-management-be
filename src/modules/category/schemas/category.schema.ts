@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 @Schema()
 export class Category {
     @Prop()
-    name: string;
+    name: String;
 }
 
-export const CategorySchema = SchemaFactory.createForClass(Category);
+export const CategorySchema = SchemaFactory.createForClass(Category).index({'$**': 'text'});

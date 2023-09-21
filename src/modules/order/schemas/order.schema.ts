@@ -25,4 +25,4 @@ export class Order {
     items: Items[];
 };
 
-export const OrderSchema = SchemaFactory.createForClass(Order);
+export const OrderSchema = SchemaFactory.createForClass(Order).index({'$**': 'text'});

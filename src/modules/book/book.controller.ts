@@ -2,6 +2,7 @@ import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundExcep
 import { BookService } from './book.service';
 import { CreateBookDTO, UpdateBookDTO } from './dto/create-book.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { SearchFilter } from 'src/common/dto/search-filter.dto';
 
 @ApiTags('book')
 @Controller('book')
@@ -20,8 +21,8 @@ export class BookController {
 
     // get all
     @Get('')
-    async getAll(@Res() res) {
-        const books = await this.bookService.getAll();
+    async getAll(@Res() res, @Query() filter: SearchFilter) {
+        const books = await this.bookService.getAll(filter);
         return res.status(HttpStatus.OK).json(books);
     }
 

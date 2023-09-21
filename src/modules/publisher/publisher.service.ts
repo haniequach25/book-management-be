@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreatePublisherDTO, UpdatePublisherDTO } from './dto/create-publisher.dto';
 import { Publisher } from './schemas/publisher.schema';
+import { SearchFilter } from 'src/common/dto/search-filter.dto';
 
 @Injectable()
 export class PublisherService {
@@ -11,7 +12,11 @@ export class PublisherService {
   ) { }
 
   // fetch all
-  async getAll(): Promise<Publisher[]> {
+  async getAll(filter: SearchFilter): Promise<Publisher[]> {
+    const query: any = { isResource: true };
+    if (filter.fullTextSearch) {
+      query.$text = { $search: filter.fullTextSearch };
+    }
     const publishers = await this.publisherModel.find().exec();
     return publishers;
   }

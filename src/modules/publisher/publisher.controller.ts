@@ -2,6 +2,7 @@ import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundExcep
 import { CreatePublisherDTO, UpdatePublisherDTO } from './dto/create-publisher.dto';
 import { PublisherService } from './publisher.service';
 import { ApiTags } from '@nestjs/swagger';
+import { SearchFilter } from 'src/common/dto/search-filter.dto';
 
 @ApiTags('publisher')
 @Controller('publisher')
@@ -20,8 +21,8 @@ export class PublisherController {
 
     // get all
     @Get('')
-    async getAll(@Res() res) {
-        const publishers = await this.publisherService.getAll();
+    async getAll(@Res() res, @Query() filter: SearchFilter) {
+        const publishers = await this.publisherService.getAll(filter);
         return res.status(HttpStatus.OK).json(publishers);
     }
 

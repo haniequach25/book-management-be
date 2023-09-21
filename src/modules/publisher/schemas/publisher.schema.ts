@@ -16,4 +16,4 @@ export class Publisher {
     email: String;
 }
 
-export const PublisherSchema = SchemaFactory.createForClass(Publisher);
+export const PublisherSchema = SchemaFactory.createForClass(Publisher).index({'$**': 'text'});

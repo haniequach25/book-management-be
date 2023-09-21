@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateAuthorDTO, UpdateAuthorDTO } from './dto/create-author.dto';
 import { Author } from './schemas/author.schema';
+import { SearchFilter } from 'src/common/dto/search-filter.dto';
 
 @Injectable()
 export class AuthorService {
@@ -11,8 +12,12 @@ export class AuthorService {
   ) { }
 
   // fetch all
-  async getAll(): Promise<Author[]> {
-    const authors = await this.authorModel.find().exec();
+  async getAll(filter: SearchFilter): Promise<Author[]> {
+    const query: any = { isResource: true };
+    if (filter.fullTextSearch) {
+      query.$text = { $search: filter.fullTextSearch };
+    }
+    const authors = await this.authorModel.find(query).exec();
     return authors;
   }
 
