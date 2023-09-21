@@ -3,7 +3,9 @@ export class CreateBookDTO {
     page_number: number;
     price: number;
     published_date: Date;
-    created_at: Date;
+    author: string;
+    category: string;
+    publisher: string;
 }
 
 export class UpdateBookDTO extends CreateBookDTO { }

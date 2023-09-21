@@ -11,10 +11,13 @@ class Items {
 export class Order {
 
     @Prop()
-    customerName: string;
+    customerName: String;
 
     @Prop()
-    customerPhoneNumber: string;
+    customerPhoneNumber: String;
+
+    @Prop()
+    totalPrice: Number;
 
     @Prop(
         [{ quantity: Number, book: { type: mongoose.Types.ObjectId, ref: "Book" } }]

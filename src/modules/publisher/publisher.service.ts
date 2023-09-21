@@ -17,7 +17,7 @@ export class PublisherService {
   }
 
   // Get one
-  async getDetail(id: number): Promise<Publisher> {
+  async getDetail(id: string): Promise<Publisher> {
     const publisher = await this.publisherModel.findById(id).exec();
     return publisher;
   }
@@ -29,7 +29,7 @@ export class PublisherService {
   }
 
   // Edit details
-  async update(id: number, createDTO: UpdatePublisherDTO): Promise<Publisher> {
+  async update(id: string, createDTO: UpdatePublisherDTO): Promise<Publisher> {
     const updated = await this.publisherModel.findByIdAndUpdate(id, createDTO, {
       new: true,
     });
@@ -37,7 +37,7 @@ export class PublisherService {
   }
 
   // Delete one
-  async delete(id: number): Promise<any> {
+  async delete(id: string): Promise<any> {
     const deleted = await this.publisherModel.findByIdAndRemove(id);
     return deleted;
   }

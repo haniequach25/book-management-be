@@ -30,7 +30,7 @@ export class BookService {
   }
 
   // Get one
-  async getDetail(id: number): Promise<Book> {
+  async getDetail(id: string): Promise<Book> {
     const book = await this.bookModel.findById(id).exec();
     return book;
   }
@@ -42,7 +42,7 @@ export class BookService {
   }
 
   // Edit details
-  async update(id: number, createDTO: UpdateBookDTO): Promise<Book> {
+  async update(id: string, createDTO: UpdateBookDTO): Promise<Book> {
     const updated = await this.bookModel.findByIdAndUpdate(id, createDTO, {
       new: true,
     });
@@ -50,7 +50,7 @@ export class BookService {
   }
 
   // Delete one
-  async delete(id: number): Promise<any> {
+  async delete(id: string): Promise<any> {
     const deleted = await this.bookModel.findByIdAndRemove(id);
     return deleted;
   }

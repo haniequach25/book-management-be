@@ -27,7 +27,7 @@ export class CategoryController {
 
     // get detail by id
     @Get('/:id')
-    async getOne(@Res() res, @Param('id') id) {
+    async getOne(@Res() res, @Param('id') id: string) {
         const category = await this.categoryService.getDetail(id);
         if (!category) throw new NotFoundException('category does not exist!');
         return res.status(HttpStatus.OK).json(category);
@@ -35,7 +35,7 @@ export class CategoryController {
 
     // update by id
     @Post('/:id')
-    async update(@Res() res, @Param('id') id, @Body() createDTO: UpdateCategoryDTO) {
+    async update(@Res() res, @Param('id') id: string, @Body() createDTO: UpdateCategoryDTO) {
         const category = await this.categoryService.update(id, createDTO);
         if (!category) throw new NotFoundException('category does not exist!');
         return res.status(HttpStatus.OK).json({
@@ -46,7 +46,7 @@ export class CategoryController {
 
     // delete by id
     @Delete('/:id')
-    async delete(@Res() res, @Param('id') id) {
+    async delete(@Res() res, @Param('id') id: string) {
         const category = await this.categoryService.delete(id);
         if (!category) throw new NotFoundException('category does not exist');
         return res.status(HttpStatus.OK).json({

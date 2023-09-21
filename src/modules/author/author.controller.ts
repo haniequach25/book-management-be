@@ -27,7 +27,7 @@ export class AuthorController {
 
     // get detail by id
     @Get('/:id')
-    async getOne(@Res() res, @Param('id') id) {
+    async getOne(@Res() res, @Param('id') id: string) {
         const author = await this.authorService.getDetail(id);
         if (!author) throw new NotFoundException('author does not exist!');
         return res.status(HttpStatus.OK).json(author);
@@ -35,7 +35,7 @@ export class AuthorController {
 
     // update by id
     @Post('/:id')
-    async update(@Res() res, @Param('id') id, @Body() createDTO: UpdateAuthorDTO) {
+    async update(@Res() res, @Param('id') id: string, @Body() createDTO: UpdateAuthorDTO) {
         const author = await this.authorService.update(id, createDTO);
         if (!author) throw new NotFoundException('author does not exist!');
         return res.status(HttpStatus.OK).json({
@@ -46,7 +46,7 @@ export class AuthorController {
 
     // delete by id
     @Delete('/:id')
-    async detele(@Res() res, @Param('id') id) {
+    async detele(@Res() res, @Param('id') id: string) {
         const author = await this.authorService.delete(id);
         if (!author) throw new NotFoundException('author does not exist');
         return res.status(HttpStatus.OK).json({

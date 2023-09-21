@@ -7,6 +7,7 @@ export class CreateOrderDTO {
     customerName: string;
     customerPhoneNumber: string;
     items: Items[];
+    totalPrice: number;
 }
 
 export class UpdateOrderDTO extends CreateOrderDTO { }

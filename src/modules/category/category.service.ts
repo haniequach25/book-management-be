@@ -8,7 +8,7 @@ import { Category } from './schemas/category.schema';
 export class CategoryService {
   constructor(
     @InjectModel('Category') private readonly categoryModel: Model<Category>,
-  ) {}
+  ) { }
 
   // fetch all
   async getAll(): Promise<Category[]> {
@@ -17,7 +17,7 @@ export class CategoryService {
   }
 
   // Get one
-  async getDetail(id: number): Promise<Category> {
+  async getDetail(id: string): Promise<Category> {
     const category = await this.categoryModel.findById(id).exec();
     return category;
   }
@@ -29,7 +29,7 @@ export class CategoryService {
   }
 
   // Edit details
-  async update(id: number, createDTO: UpdateCategoryDTO): Promise<Category> {
+  async update(id: string, createDTO: UpdateCategoryDTO): Promise<Category> {
     const updated = await this.categoryModel.findByIdAndUpdate(id, createDTO, {
       new: true,
     });
@@ -37,7 +37,7 @@ export class CategoryService {
   }
 
   // Delete one
-  async delete(id: number): Promise<any> {
+  async delete(id: string): Promise<any> {
     const deleted = await this.categoryModel.findByIdAndRemove(id);
     return deleted;
   }

@@ -4,16 +4,16 @@ import * as mongoose from 'mongoose';
 @Schema()
 export class Publisher {
     @Prop()
-    name: string;
+    name: String;
 
     @Prop()
-    address: string;
+    address: String;
 
     @Prop()
-    phoneNumber: string;
+    phoneNumber: String;
 
     @Prop()
-    email: string;
+    email: String;
 }
 
 export const PublisherSchema = SchemaFactory.createForClass(Publisher);

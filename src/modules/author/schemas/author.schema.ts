@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 @Schema()
 export class Author {
     @Prop()
-    firstName: string;
+    firstName: String;
 
     @Prop()
     lastName: String;

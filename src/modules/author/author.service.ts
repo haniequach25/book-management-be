@@ -17,7 +17,7 @@ export class AuthorService {
   }
 
   // Get one
-  async getDetail(id: number): Promise<Author> {
+  async getDetail(id: string): Promise<Author> {
     const author = await this.authorModel.findById(id).exec();
     return author;
   }
@@ -29,7 +29,7 @@ export class AuthorService {
   }
 
   // Edit details
-  async update(id: number, createDTO: UpdateAuthorDTO): Promise<Author> {
+  async update(id: string, createDTO: UpdateAuthorDTO): Promise<Author> {
     const updated = await this.authorModel.findByIdAndUpdate(id, createDTO, {
       new: true,
     });
@@ -37,7 +37,7 @@ export class AuthorService {
   }
 
   // Delete one
-  async delete(id: number): Promise<any> {
+  async delete(id: string): Promise<any> {
     const deleted = await this.authorModel.findByIdAndRemove(id);
     return deleted;
   }

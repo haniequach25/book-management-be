@@ -27,7 +27,7 @@ export class PublisherController {
 
     // get detail by id
     @Get('/:id')
-    async getOne(@Res() res, @Param('id') id) {
+    async getOne(@Res() res, @Param('id') id: string) {
         const publisher = await this.publisherService.getDetail(id);
         if (!publisher) throw new NotFoundException('publisher does not exist!');
         return res.status(HttpStatus.OK).json(publisher);
@@ -35,7 +35,7 @@ export class PublisherController {
 
     // update by id
     @Post('/:id')
-    async update(@Res() res, @Param('id') id, @Body() createDTO: UpdatePublisherDTO) {
+    async update(@Res() res, @Param('id') id: string, @Body() createDTO: UpdatePublisherDTO) {
         const publisher = await this.publisherService.update(id, createDTO);
         if (!publisher) throw new NotFoundException('publisher does not exist!');
         return res.status(HttpStatus.OK).json({
@@ -46,7 +46,7 @@ export class PublisherController {
 
     // delete by id
     @Delete('/:id')
-    async delete(@Res() res, @Param('id') id) {
+    async delete(@Res() res, @Param('id') id: string) {
         const publisher = await this.publisherService.delete(id);
         if (!publisher) throw new NotFoundException('publisher does not exist');
         return res.status(HttpStatus.OK).json({

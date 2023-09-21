@@ -22,7 +22,7 @@ export class OrderService {
   }
 
   // Get one
-  async getDetail(id: number): Promise<Order> {
+  async getDetail(id: string): Promise<Order> {
     const order = await this.orderModel.findById(id).exec();
     return order;
   }
@@ -34,7 +34,7 @@ export class OrderService {
   }
 
   // Edit details
-  async update(id: number, createDTO: UpdateOrderDTO): Promise<Order> {
+  async update(id: string, createDTO: UpdateOrderDTO): Promise<Order> {
     const updated = await this.orderModel.findByIdAndUpdate(id, createDTO, {
       new: true,
     });
@@ -42,7 +42,7 @@ export class OrderService {
   }
 
   // Delete one
-  async delete(id: number): Promise<any> {
+  async delete(id: string): Promise<any> {
     const deleted = await this.orderModel.findByIdAndRemove(id);
     return deleted;
   }

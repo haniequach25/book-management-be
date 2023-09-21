@@ -27,7 +27,7 @@ export class OrderController {
 
     // get detail by id
     @Get('/:id')
-    async getOne(@Res() res, @Param('id') id) {
+    async getOne(@Res() res, @Param('id') id: string) {
         const order = await this.orderService.getDetail(id);
         if (!order) throw new NotFoundException('order does not exist!');
         return res.status(HttpStatus.OK).json(order);
@@ -35,7 +35,7 @@ export class OrderController {
 
     // update by id
     @Post('/:id')
-    async update(@Res() res, @Param('id') id, @Body() createDTO: UpdateOrderDTO) {
+    async update(@Res() res, @Param('id') id: string, @Body() createDTO: UpdateOrderDTO) {
         const order = await this.orderService.update(id, createDTO);
         if (!order) throw new NotFoundException('order does not exist!');
         return res.status(HttpStatus.OK).json({
@@ -46,7 +46,7 @@ export class OrderController {
 
     // delete by id
     @Delete('/:id')
-    async detele(@Res() res, @Param('id') id) {
+    async detele(@Res() res, @Param('id') id: string) {
         const order = await this.orderService.delete(id);
         if (!order) throw new NotFoundException('order does not exist');
         return res.status(HttpStatus.OK).json({
