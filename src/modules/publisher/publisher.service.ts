@@ -17,7 +17,7 @@ export class PublisherService {
     if (filter.fullTextSearch) {
       query.$text = { $search: filter.fullTextSearch };
     }
-    const publishers = await this.publisherModel.find().exec();
+    const publishers = await this.publisherModel.find(query).exec();
     return publishers;
   }
 
